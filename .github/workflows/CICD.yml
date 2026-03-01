@@ -8,6 +8,7 @@ on:
 
   workflow_dispatch: 
 
+# every job 
 jobs:
 
   code:
@@ -21,7 +22,7 @@ jobs:
         run: echo "COde Clone from GitHub"
 
   build:
-
+    needs: [build]
     runs-on: ubuntu-latest
 
     steps:
@@ -31,7 +32,7 @@ jobs:
         run: echo "Docker Container build"
 
   test:
-
+    needs: [build]
     runs-on: ubuntu-latest
 
     steps:
@@ -43,7 +44,7 @@ jobs:
         
 
   deploy:
-
+    needs: [build,test]
     runs-on: ubuntu-latest
 
     steps:
