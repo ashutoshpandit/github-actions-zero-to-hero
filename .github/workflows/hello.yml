@@ -20,7 +20,7 @@ jobs:
       - name: say hello to UserName
         run: echo "Hello Ashutosh" 
   details:
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     steps:
       - name: shows the version of docker and python
         run: docker --version $$ python --version
