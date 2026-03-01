@@ -6,7 +6,7 @@ on:
   push:
     branches: [main]
     paths:
-      - '**.mtml'
+      - '**.html'
 
 # These are jobs inside the workflow
 jobs:
