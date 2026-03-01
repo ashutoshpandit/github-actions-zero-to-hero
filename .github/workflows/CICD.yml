@@ -8,7 +8,7 @@ on:
 
   workflow_dispatch: 
 
-# every job 
+# every job needs a separate runner, its called parallelism
 jobs:
 
   code:
@@ -22,7 +22,7 @@ jobs:
         run: echo "COde Clone from GitHub"
 
   build:
-    needs: [build]
+    needs: [code]
     runs-on: ubuntu-latest
 
     steps:
