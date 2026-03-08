@@ -1,0 +1,42 @@
+name: CICD_Practice
+
+on: 
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: this is the environment where workflow runs
+        default: 'dev'
+        required: true
+        type: choice
+        options:
+          - dev
+          - prod
+          - staging
+
+
+jobs:
+  code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        run: echo "code clone from github"
+  build:
+    needs: [code]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Docker container
+        run: echo "Docker container build"
+  test:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test the container
+        run: echo "testing the container"
+  deploy:
+    if: inputs.environment == 'dev'
+    needs: [build,test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploying the App
+        run: echo "deploying the application"
+  
