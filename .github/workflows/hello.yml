@@ -4,6 +4,9 @@ name: Hello Workflow
 on:
   push:
     branches: [main]
+    #this pipleline only run when the changes happens on the html file
+    paths:
+      - '**.html'  
 
 #these are jobs inside the workflow
 jobs: 
