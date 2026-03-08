@@ -2,6 +2,16 @@ name: CICD_Practice
 
 on: 
   workflow_dispatch:
+    inputs:
+      environment:
+        description: this is the environment where workflow runs
+        default: 'dev'
+        required: true
+        type: choice
+        options:
+          - dev
+          - prod
+          - staging
 
 
 jobs:
