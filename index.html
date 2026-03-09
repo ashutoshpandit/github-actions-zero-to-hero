@@ -3,272 +3,356 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashutosh Pandit | Infrastructure Engineer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <title>Ashutosh Pandit | DevOps Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --accent: #ccff00; /* Electric Lime */
-            --bg: #0a0a0a;
-            --surface: #161616;
-            --border: #262626;
-            --text: #ffffff;
-            --text-dim: #888888;
+            /* Updated Color Palette: Midnight & Amethyst */
+            --primary: #a855f7;      /* Purple */
+            --secondary: #6366f1;    /* Indigo */
+            --bg-dark: #09090b;      /* Zinc 950 */
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --text-main: #f4f4f5;    /* Zinc 100 */
+            --text-dim: #a1a1aa;     /* Zinc 400 */
+            --accent-glow: rgba(168, 85, 247, 0.15);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Space Grotesk', sans-serif;
-            line-height: 1.5;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 0% 0%, var(--accent-glow) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(99, 102, 241, 0.1) 0%, transparent 40%);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Brutalist Layout Grid */
-        .grid-container {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            min-height: 100vh;
-        }
-
-        /* Fixed Sidebar Navigation */
-        aside {
-            background: var(--surface);
-            border-right: 1px solid var(--border);
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
+        /* Animated Progress Bar */
+        #scroll-progress {
             position: fixed;
-            width: 280px;
-            height: 100vh;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            z-index: 1000;
+            width: 0%;
         }
 
-        .logo-area {
-            font-family: 'Space Mono', monospace;
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin-bottom: 60px;
-            color: var(--accent);
-        }
-
-        nav a {
-            display: block;
-            color: var(--text-dim);
-            text-decoration: none;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: 0.3s;
-        }
-
-        nav a:hover, nav a.active {
-            color: var(--accent);
-            padding-left: 10px;
-        }
-
-        /* Main Content Area */
-        main {
-            margin-left: 280px;
-            padding: 0 80px;
-        }
-
-        section {
-            padding: 100px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        h1 {
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 700;
-            line-height: 0.9;
-            letter-spacing: -3px;
-            margin-bottom: 2rem;
-        }
-
-        .highlight {
-            color: var(--accent);
-        }
-
-        p {
-            font-size: 1.25rem;
-            color: var(--text-dim);
-            max-width: 700px;
-            margin-bottom: 2rem;
-        }
-
-        /* Skill Grid - Boxy Style */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 1px;
-            background: var(--border);
-            border: 1px solid var(--border);
-        }
-
-        .skill-box {
-            background: var(--bg);
-            padding: 30px;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.85rem;
-            transition: 0.3s;
-        }
-
-        .skill-box:hover {
-            background: var(--accent);
-            color: var(--bg);
-        }
-
-        /* Modern Project List (DevOps focus) */
-        .project-item {
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 40px 0;
-            border-bottom: 1px solid var(--border);
-            transition: 0.4s;
+            padding: 1.5rem 10%;
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .project-item:hover {
-            border-color: var(--accent);
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .project-info h3 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .tag-row {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--accent);
-            text-transform: uppercase;
-        }
-
-        /* Call to Action */
-        .btn {
-            display: inline-block;
-            padding: 20px 40px;
-            border: 1px solid var(--accent);
-            color: var(--accent);
+        nav .links a {
+            color: var(--text-dim);
             text-decoration: none;
-            font-family: 'Space Mono', monospace;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        nav .links a:hover {
+            color: var(--primary);
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 100px 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-tag {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .hero-p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .terminal-window {
+            background: #111113;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.08);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            margin-top: 2rem;
+        }
+
+        .terminal-header {
+            background: #18181b;
+            padding: 10px 15px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        .terminal-body {
+            padding: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: #d4d4d8;
+        }
+
+        .code-path { color: var(--primary); }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--primary);
+            background: rgba(168, 85, 247, 0.1);
+            transform: translateY(-3px);
+            color: white;
+        }
+
+        .project-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .project-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: scale(1.02);
+            border-color: var(--secondary);
+        }
+
+        .project-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
             font-weight: 700;
+            font-size: 0.9rem;
             transition: 0.3s;
         }
 
-        .btn:hover {
-            background: var(--accent);
-            color: var(--bg);
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
         }
 
-        @media (max-width: 900px) {
-            .grid-container { grid-template-columns: 1fr; }
-            aside { position: relative; width: 100%; height: auto; padding: 30px; }
-            main { margin-left: 0; padding: 0 30px; }
-            h1 { font-size: 4rem; }
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.2);
+        }
+
+        footer {
+            padding: 4rem 10%;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            nav .links { display: none; }
+            h1 { font-size: 3rem; }
         }
     </style>
 </head>
 <body>
 
-<div class="grid-container">
-    <aside>
-        <div class="logo-area">AP_DEVOPS_v2</div>
-        <nav>
-            <a href="#home">01. Root</a>
-            <a href="#about">02. Init</a>
-            <a href="#skills">03. Stack</a>
-            <a href="#projects">04. Deployments</a>
-            <a href="#contact">05. Connect</a>
-        </nav>
-        <div style="margin-top: auto; font-size: 0.7rem; color: #444;">
-            STATUS: ACTIVE <br>
-            LOCATION: INDIA
+<div id="scroll-progress"></div>
+
+<nav>
+    <div class="logo">ASHUTOSH.PANDIT</div>
+    <div class="links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Stack</a>
+        <a href="#projects">Work</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<section id="home">
+    <div class="hero-content">
+        <span class="hero-tag">// Welcome to the cluster</span>
+        <h1>Engineering Reliable Systems.</h1>
+        <p class="hero-p">I'm Ashutosh, an Aspiring DevOps Engineer obsessed with 100% uptime and automated CI/CD workflows.</p>
+        
+        <div class="cta-group">
+            <a href="#contact" class="btn btn-primary">Hire the Engineer</a>
+            <a href="#projects" class="btn btn-outline">View Infrastructure</a>
         </div>
-    </aside>
+    </div>
 
-    <main>
-        <section id="home">
-            <span style="font-family: 'Space Mono'; color: var(--accent);">[SYSTEM.READY]</span>
-            <h1>Ashutosh<br>Pandit<span class="highlight">_</span></h1>
-            <p>Infrastructure Automator & DevOps Specialist. I build pipelines that never sleep and clusters that never fail.</p>
-            <a href="#contact" class="btn">INITIALIZE CONTACT</a>
-        </section>
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+        </div>
+        <div class="terminal-body">
+            <p><span class="code-path">ashutosh@portfolio:~$</span> docker build -t devops-career:latest .</p>
+            <p>Sending build context to Docker daemon...</p>
+            <p>Step 1/3 : FROM knowledge/linux:stable</p>
+            <p>Step 2/3 : RUN install automation bash git docker</p>
+            <p>Step 3/3 : CMD ["deploy", "--scale", "infinite"]</p>
+            <p style="color: #27c93f;">Successfully built Ashutosh_Pandit</p>
+        </div>
+    </div>
+</section>
 
-        <section id="about">
-            <h2 style="font-size: 0.9rem; letter-spacing: 4px; color: var(--text-dim); margin-bottom: 2rem;">// ABOUT_ME</h2>
-            <p>Transitioning career into the DevOps ecosystem with a focus on <strong>reliability engineering</strong>. I specialize in taking manual, fragmented processes and turning them into automated, version-controlled infrastructure.</p>
-        </section>
+<section id="about">
+    <div class="hero-content">
+        <span class="hero-tag">// The Mission</span>
+        <h2>About the Transition</h2>
+        <p>Currently in a high-intensity career pivot, spending 10+ hours daily mastering the bridge between development and operations. My philosophy is simple: <strong>If you do it twice, automate it.</strong></p>
+    </div>
+</section>
 
-        <section id="skills">
-            <h2 style="font-size: 0.9rem; letter-spacing: 4px; color: var(--text-dim); margin-bottom: 2rem;">// TECH_STACK</h2>
-            <div class="skills-container">
-                <div class="skill-box">Linux/Unix</div>
-                <div class="skill-box">Bash Shell</div>
-                <div class="skill-box">Docker Hub</div>
-                <div class="skill-box">Kubernetes</div>
-                <div class="skill-box">Jenkins CI/CD</div>
-                <div class="skill-box">AWS Cloud</div>
-                <div class="skill-box">GitOps</div>
-                <div class="skill-box">Prometheus</div>
-            </div>
-        </section>
+<section id="skills">
+    <span class="hero-tag">// Infrastructure Stack</span>
+    <h2>Technical Toolkit</h2>
+    <div class="skills-grid">
+        <span class="skill-tag">Linux (Ubuntu/CentOS)</span>
+        <span class="skill-tag">Shell Scripting</span>
+        <span class="skill-tag">Docker & Compose</span>
+        <span class="skill-tag">Kubernetes (K8s)</span>
+        <span class="skill-tag">Jenkins Pipelines</span>
+        <span class="skill-tag">AWS (EC2/S3/IAM)</span>
+        <span class="skill-tag">GitOps</span>
+        <span class="skill-tag">Prometheus & Grafana</span>
+    </div>
+</section>
 
-        <section id="projects">
-            <h2 style="font-size: 0.9rem; letter-spacing: 4px; color: var(--text-dim); margin-bottom: 2rem;">// DEPLOYMENTS</h2>
-            
-            <div class="project-item">
-                <div class="project-info">
-                    <div class="tag-row">Automation / Bash</div>
-                    <h3>System Health Monitor</h3>
-                    <p style="font-size: 1rem;">Automated resource tracking and alert system for Linux environments.</p>
-                </div>
-                <div class="highlight" style="font-family: 'Space Mono';">01</div>
-            </div>
+<section id="projects">
+    <span class="hero-tag">// Automated Solutions</span>
+    <h2>Latest Projects</h2>
+    <div class="project-container">
+        <div class="project-card">
+            <h3>System Health Monitor</h3>
+            <p>A Bash-based monitoring suite that exports system metrics to logs for real-time visibility.</p>
+        </div>
+        <div class="project-card">
+            <h3>Dockerized Bank App</h3>
+            <p>Multi-tier deployment of a Python application with isolated networking and volume persistence.</p>
+        </div>
+        <div class="project-card">
+            <h3>CI/CD Pipeline v1</h3>
+            <p>Jenkins pipeline integrating Git hooks to automatically trigger container builds on push.</p>
+        </div>
+    </div>
+</section>
 
-            <div class="project-item">
-                <div class="project-info">
-                    <div class="tag-row">Containers / Python</div>
-                    <h3>AI-BankApp Deployment</h3>
-                    <p style="font-size: 1rem;">Full-stack containerization with Docker Compose and secure networking.</p>
-                </div>
-                <div class="highlight" style="font-family: 'Space Mono';">02</div>
-            </div>
+<section id="contact">
+    <div class="hero-content">
+        <h2>Let's connect</h2>
+        <p>I am looking for an entry-level DevOps role where I can contribute to your production environment.</p>
+        <div class="skills-grid" style="margin-top: 1rem;">
+            <a href="#" style="color: var(--primary); text-decoration: none;">GitHub</a>
+            <a href="#" style="color: var(--primary); text-decoration: none;">LinkedIn</a>
+            <a href="mailto:ashutosh@example.com" style="color: var(--primary); text-decoration: none;">Email Me</a>
+        </div>
+        <a href="#" class="btn btn-primary" style="margin-top: 2rem; display: inline-block;">Download Resume</a>
+    </div>
+</section>
 
-            <div class="project-item">
-                <div class="project-info">
-                    <div class="tag-row">CI-CD / Jenkins</div>
-                    <h3>Git-to-Prod Pipeline</h3>
-                    <p style="font-size: 1rem;">Automated testing and deployment triggers for microservices.</p>
-                </div>
-                <div class="highlight" style="font-family: 'Space Mono';">03</div>
-            </div>
-        </section>
+<footer>
+    © 2026 Ashutosh Pandit | System Architect in Training
+</footer>
 
-        <section id="contact">
-            <h2 style="font-size: 0.9rem; letter-spacing: 4px; color: var(--text-dim); margin-bottom: 2rem;">// CONTACT</h2>
-            <p>Ready to automate your infrastructure? Let's discuss your next project.</p>
-            <div style="font-family: 'Space Mono'; line-height: 2;">
-                <div>EMAIL: <span class="highlight">ashutosh@example.com</span></div>
-                <div>GITHUB: <span class="highlight">github.com/ashutosh</span></div>
-                <div>LINKEDIN: <span class="highlight">linkedin.com/in/ashutosh</span></div>
-            </div>
-            <a href="#" class="btn" style="margin-top: 3rem;">DOWNLOAD_RESUME.PDF</a>
-        </section>
-
-        <footer style="padding: 40px 0; color: #333; font-size: 0.8rem; font-family: 'Space Mono';">
-            BUILD_VERSION: 2026.03 <br>
-            COMPLETED_BY: ASHUTOSH PANDIT
-        </footer>
-    </main>
-</div>
+<script>
+    window.onscroll = function() {
+        let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        let scrolled = (winScroll / height) * 100;
+        document.getElementById("scroll-progress").style.width = scrolled + "%";
+    };
+</script>
 
 </body>
 </html>
